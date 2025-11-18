@@ -13,12 +13,10 @@ books_df = con.execute("select concat(bookid, ',', bookname) as book_info from B
 books = books_df['book_info'].tolist()
 
 # 3. 화면 구성
-st.title("📱 마당서점 모바일 관리")
 tab1, tab2, tab3 = st.tabs(["고객 조회", "주문 입력", "신규 가입"])
 
 # --- [탭 1] 고객 조회 ---
 with tab1:
-    st.header("고객 조회")
     name = st.text_input("고객명 입력", key="search_name")
     custid = None 
 
@@ -50,7 +48,7 @@ with tab1:
 
 # --- [탭 2] 주문 입력 ---
 with tab2:
-    st.header("주문 입력")
+
     
     if custid is None:
         st.info("👉 [고객 조회] 탭에서 고객을 먼저 찾아주세요.")
@@ -80,7 +78,7 @@ with tab2:
 
 # --- [탭 3] 신규 고객 등록 ---
 with tab3:
-    st.header("신규 고객 가입")
+
     new_name = st.text_input("이름", key="new_n")
     new_addr = st.text_input("주소", key="new_a")
     new_phone = st.text_input("전화번호", key="new_p")
@@ -98,3 +96,4 @@ with tab3:
             st.rerun()
         else:
             st.error("이름은 필수입니다.")
+
