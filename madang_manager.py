@@ -28,11 +28,11 @@ with tab1:
         if not customer_df.empty:
             custid = customer_df.iloc[0]['custid'] # pandas 방식으로 값 추출
             st.success(f"검색 성공: {name} (ID: {custid})")
-            st.table(customer_df) # 깔끔하게 표로 보여주기
+            # st.table(customer_df) # 깔끔하게 표로 보여주기
 
             # 주문 내역 조회
             sql_history = f'''
-                select b.bookname, o.orderdate, o.saleprice 
+                select b.bookname, str_to_date(o.orderdate, '%Y-%m-%d'), o.saleprice 
                 from Book b, Orders o 
                 where o.bookid = b.bookid and o.custid = {custid}
             '''
@@ -96,5 +96,6 @@ with tab3:
             st.rerun()
         else:
             st.error("이름은 필수입니다.")
+
 
 
