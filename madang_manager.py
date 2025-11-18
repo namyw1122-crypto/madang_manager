@@ -38,7 +38,7 @@ with tab1:
             '''
             history_df = con.execute(sql_history).df()
 
-            st.subheader("구매 이력")
+    
             if not history_df.empty:
                 st.dataframe(history_df, use_container_width=True) # 모바일 너비에 맞춤
             else:
@@ -96,4 +96,5 @@ with tab3:
             st.rerun()
         else:
             st.error("이름은 필수입니다.")
+
 
