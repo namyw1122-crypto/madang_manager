@@ -32,7 +32,7 @@ with tab1:
 
             # 주문 내역 조회
             sql_history = f'''
-                select b.bookname, str_to_date(o.orderdate, '%Y-%m-%d'), o.saleprice 
+                select b.bookname, o.orderdate, o.saleprice 
                 from Book b, Orders o 
                 where o.bookid = b.bookid and o.custid = {custid}
             '''
@@ -40,6 +40,7 @@ with tab1:
 
     
             if not history_df.empty:
+                history_df['orderdate'] = pd.to_datetime(history_df['orderdate']).dt.strftime('%Y-%m-%d')
                 st.dataframe(history_df, use_container_width=True) # 모바일 너비에 맞춤
             else:
                 st.info("구매 내역이 없습니다.")
@@ -96,6 +97,7 @@ with tab3:
             st.rerun()
         else:
             st.error("이름은 필수입니다.")
+
 
 
 
