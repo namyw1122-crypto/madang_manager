@@ -32,9 +32,9 @@ with tab1:
 
             # 주문 내역 조회
             sql_history = f'''
-                select b.bookname, o.orderdate, o.saleprice 
-                from Book b, Orders o 
-                where o.bookid = b.bookid and o.custid = {custid}
+                select c.custid, c.name, b.bookname, o.orderdate, o.saleprice 
+                from Customer c, Book b, Orders o 
+                where o.bookid = b.bookid and o.custid = {custid} and c.custid=o.custid
             '''
             history_df = con.execute(sql_history).df()
 
@@ -57,7 +57,7 @@ with tab2:
         st.write(f"**{name}** 님의 주문을 입력합니다.")
         
         select_book = st.selectbox("구매 서적", books)
-        price = st.number_input("판매 금액", min_value=0, step=1000)
+        price = st.text_input("판매 금액")
 
         if st.button('거래 입력', type="primary"): # 강조 버튼
             if select_book:
@@ -97,6 +97,7 @@ with tab3:
             st.rerun()
         else:
             st.error("이름은 필수입니다.")
+
 
 
 
