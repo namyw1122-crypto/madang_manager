@@ -13,7 +13,7 @@ books_df = con.execute("select concat(bookid, ',', bookname) as book_info from B
 books = books_df['book_info'].tolist()
 
 # 3. 화면 구성
-tab1, tab2, tab3 = st.tabs(["고객 조회", "주문 입력", "신규 가입"])
+tab1, tab2, tab3 = st.tabs(["고객 조회", "주문 입력", "고객 등록"])
 
 # --- [탭 1] 고객 조회 ---
 with tab1:
@@ -97,6 +97,7 @@ with tab3:
             st.rerun()
         else:
             st.error("이름은 필수입니다.")
+
 
 
 
